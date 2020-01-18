@@ -208,6 +208,12 @@ class BfxRest:
     #               Authenticated Data               #
     ##################################################
 
+    async def get_available_balance(self, symbol, dir, rate, type):
+        endpoint = "auth/calc/order/avail"
+        params = "?symbol={}&dir={}&rate={}&type={}".format(symbol, dir, rate, type)
+        raw_balances = await self.post(endpoint,params=params)
+        return raw_balances
+        
     async def get_wallets(self):
         """
         Get all wallets on account associated with API_KEY - Requires authentication.
